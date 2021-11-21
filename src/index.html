@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIKA - FAQ Search Engine</title>
+  <link rel="shortcut icon" href="https://s1.vika.cn/public/2021/09/23/0c740e5e140b4064b3916bf4830d04af?imageView2/1/w/64/h/64/q/100!" type="image/x-icon">
+  <!-- CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <style lang="css">
+    html,body {
+      font-size: 14px;
+    }
+
+    pre {
+      overflow: auto;
+      background-color: #f4f4f4;
+      padding: 1rem;
+      height: 400px;
+      white-space: pre-wrap;
+    }
+
+    .img-cover{
+      width: 80px;
+      max-width: 100%;
+      display: block;
+    }
+
+    .big-title{
+      color: #7b67ee;
+    }
+    .img-avatar{
+      width: 48px;
+      height: 48px;
+    }
+    .media {
+      position: relative;
+      background-color: #f8f9fa!important;
+    }
+    .media:hover {
+      cursor: default;
+    }
+    .media-body {
+      word-break: break-all;
+    }
+    .media-body p {
+      color: #767676;
+    }
+    .btn-send-message {
+      position: absolute;
+      right: -1px;
+      top: -1px;
+    }
+    span.highline {
+      color: #fb6767;
+    }
+  </style>
+</head>
+
+<body class="pt-5 ">
+  <div class="container-xl pb-5">
+    <div class="wrapper-logo">
+      <div class="px-5"><img class="img-cover mx-auto rounded-circle" src="https://s1.vika.cn/public/2021/09/23/0c740e5e140b4064b3916bf4830d04af?imageView2/1/w/200/h/200/q/100!" alt="cover"></div>
+      <h1 class="text-center big-title my-5 d-none d-sm-block">VIKA FAQ 搜索引擎</h1>
+      <h3 class="text-center big-title mt-4 mb-5 d-block d-sm-none">VIKA FAQ 搜索引擎</h3>
+    </div>
+    <div>
+      <div class="form-group">
+        <div class="input-group col-md-8 offset-md-2 col-sm-12">
+          <input type="text" class="form-control " name="faq-keywords" id="faq-keywords" placeholder="输入问题关键词，多个关键词用空格隔开">
+          <div class="input-group-append btn-submit-area">
+            <button class="btn btn-primary btn-block" type="button" id="btn-submit">
+              搜一搜
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5">
+      <ul class="list-unstyled" id="results-wrapper"></ul>
+    </div>
+
+    <div class="form-group d-none" id="wrapper-debug-box">
+      <h3>API 返回结果：</h5>
+      <pre id="results-output" class="w-100"></pre>
+    </div>
+    
+  </div>
+
+  <div class="fixed-bottom text-center bg-white text-black-50 py-2">
+    <footer>Power by vikadata</footer>
+  </div>
+
+  <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script src="https://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script src="frontend/common.js"></script>
+  <script>
+    window.vikaApp = {
+      "debug": false,  // 是否开启调试模式，开启后会在界面显示日志信息
+      "showBtn": true, // 是否在每个消息卡片右上角显示“发送”按钮
+      "keywords": "" //搜索框里的关键词
+    }
+
+    $(document).ready(function(){
+
+      // 搜索框提交按钮的点击事件监听
+      $("#btn-submit").click(search)
+
+      // 搜索框的键盘“回车键”敲击事件监听
+      $('#faq-keywords').bind('keypress', function(event) {
+          if (event.keyCode == "13") {
+              event.preventDefault();
+              //回车执行查询  
+              search()
+          }
+      });
+
+      // 如果启用了调试模式，则在界面显示日志信息
+      window.vikaApp.debug && enableDebugMode()
+
+      // 初始化企业微信端的环境配置
+      initWecomConfig()
+    })
+  </script>
+</body>
+
+</html>
