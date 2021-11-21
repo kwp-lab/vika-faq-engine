@@ -1,0 +1,33 @@
+# 全量配置说明请访问：https://github.com/serverless-components/tencent-framework-components/blob/master/docs/configure.md
+
+# 应用组织信息
+app: '' # 应用名称。留空则默认取当前组件的实例名称为app名称。
+stage: 'dev' # 环境名称。默认值是 dev。建议使用${env.STAGE}变量定义环境名称
+
+
+# 组件信息
+component: express # 组件名称
+name: vika_faqEngine # 组件实例名称。
+
+
+inputs:
+  entryFile: index.js #以您实际入口文件名为准
+  src:
+    src: ./
+    exclude:
+      - ./.env
+      #- 'node_modules/**' #根据实际情况是否将依赖库同代码一起打包上传，https://cloud.tencent.com/document/product/583/39780
+  region: ap-guangzhou
+  description: 企业微信客服话术库-维格表版
+  runtime: Nodejs12.16
+  functionName: express-vika_faqEngine # 云函数名称
+  serviceName: vika_faqEngine # api网关服务名称
+  functionConf:
+    eip: true
+    timeout: 10
+  apigatewayConf:
+    enableCORS: true
+    protocols:
+      - http
+      - https
+    environment: release
