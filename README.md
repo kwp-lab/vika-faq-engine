@@ -65,12 +65,24 @@ npm install
 <br/>
 
 **（2）编辑 ```config_init.js``` 文件，填写必要的执行时参数**
+
 此文件用于配置 nodejs 运行时的参数。
 请根据文件里的备注说明填写参数，填写完毕后，将 ```config_init.js``` 重命名为 ```config.js```
 
 <br/>
 
-**（3）本地启动**
+**（3）将自建应用的参数，填写到维格表《自建应用配置》**
+
+如果你完成了上文的前提准备第二点，另存到自己的空间站后，会看到一个表《自建应用配置》，请将企业微信自建应用的 `appSecret` 和企业的 `corpid` 填写到该表的字段内
+
+![自建应用配置表示意图](docs/screenshots/chrome_GLZqIRlkQG.png)
+
+此文件用于配置 nodejs 运行时的参数。
+请根据文件里的备注说明填写参数，填写完毕后，将 ```config_init.js``` 重命名为 ```config.js```
+
+<br/>
+
+**（4）本地启动**
 
 ```bash
 npm run dev
@@ -93,6 +105,8 @@ npm run dev
 ### 2. 创建自建应用
 
 前往企业微信管理后台，按照教程 [创建与配置企业微信自建应用](docs/how-to-create-wecom-app.md) 的操作步骤执行。
+
+<br/>
 
 ### 3. 部署
 
